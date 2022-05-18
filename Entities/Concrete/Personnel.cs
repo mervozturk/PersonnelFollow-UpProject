@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Personnel
+    public class Personnel : IEntity
     {
         public int PersonnelId { get; set; }
         public string IdentityNumber { get; set; }
