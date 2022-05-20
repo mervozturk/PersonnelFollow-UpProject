@@ -1,14 +1,15 @@
-﻿using Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs
 {
-    public class Assigment :IEntity
+    public class UnitAssigmentDetailDto
     {
+        public int UnitId { get; set; }
+        public string UnitName { get; set; }
         public int AssigmentId { get; set; }
         public DateTime Deadline { get; set; }
         public DateTime SubmittedDate { get; set; }

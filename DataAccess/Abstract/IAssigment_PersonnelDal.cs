@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,8 @@ namespace DataAccess.Abstract
 {
     public interface IAssigment_PersonnelDal :IEntityRepository<Assigment_Personnel>
     {
+        List<AssigmentDetailDto> GetAssigmentDetail();
+        List<Assigment> GetAssigmentByPersonnelId(int personnelId);
+        AssigmentDetailDto GetByAssigmentId(int assigmentId);
     }
 }
