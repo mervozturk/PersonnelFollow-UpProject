@@ -13,6 +13,7 @@ namespace DataAccess.Abstract
     {
         List<AssigmentDetailDto> GetAssigmentDetail();
         List<Assigment> GetAssigmentByPersonnelId(int personnelId);
-        AssigmentDetailDto GetByAssigmentId(int assigmentId);
+        List<AssigmentDetailDto> GetByAssigmentId(int assigmentId);
+        List<Personnel> GetPersonnelByAssigmentId(int assigmentId);
     }
 }

@@ -9,6 +9,7 @@ namespace Entities.Concrete
 {
     public class Assigment_Personnel : IEntity
     {
+        public int Id { get; set; }
         public int AssigmentId { get; set; }
         public int PersonnelId { get; set; }
     }

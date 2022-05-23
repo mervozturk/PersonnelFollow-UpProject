@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,44 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<List<Assigment>> GetActiveAssigment()
+        {
+            return new SuccessDataResult<List<Assigment>>(_assigmentDal.GetAll(p=>p.IsActive==true));
+        }
+
         public IDataResult<List<Assigment>> GetAll()
         {
             return new SuccessDataResult<List<Assigment>>(_assigmentDal.GetAll());
+        }
+
+        public IDataResult<List<Assigment>> GetAllActive(int branchId, int unitId)
+        {
+            return new SuccessDataResult<List<Assigment>>(_assigmentDal.GetAll(a=>a.BranchId==branchId && a.UnitId==unitId && a.IsActive==true));
+        }
+
+        public IDataResult<List<AssigmentDetailDto>> GetAllDetail()
+        {
+            return new SuccessDataResult<List<AssigmentDetailDto>>(_assigmentDal.GetAllDetail());
+        }
+
+        public IDataResult<List<AssigmentDetailDto>> GetAllDetailActive()
+        {
+            return new SuccessDataResult<List<AssigmentDetailDto>>(_assigmentDal.GetAllActive());
+        }
+
+        public IDataResult<List<AssigmentDetailDto>> GetAllDetailByAssigmentId(int Id)
+        {
+            return new SuccessDataResult<List<AssigmentDetailDto>>(_assigmentDal.GetByAssigmentId(Id));
+        }
+
+        public IDataResult<List<AssigmentDetailDto>> GetAllDetailPassive()
+        {
+            return new SuccessDataResult<List<AssigmentDetailDto>>(_assigmentDal.GetAllAPassive());
+        }
+
+        public IDataResult<List<AssigmentDetailDto>> GetAssigmentByBranchAndUnit(int branchId, int unitId)
+        {
+            return new SuccessDataResult<List<AssigmentDetailDto>>(_assigmentDal.GetAllDetail().Where(a=>a.BranchId==branchId && a.UnitId==unitId).ToList());
         }
 
         public IDataResult<Assigment> GetById(int Id)

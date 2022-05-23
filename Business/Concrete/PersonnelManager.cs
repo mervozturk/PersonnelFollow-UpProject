@@ -13,6 +13,10 @@ namespace Business.Concrete
     public class PersonnelManager : IPersonnelService
     {
         IPersonnelDal _personnelDal;
+        public PersonnelManager(IPersonnelDal personnelDal)
+        {
+            _personnelDal = personnelDal;
+        }
         public IResult Add(Personnel personnel)
         {
             _personnelDal.Add(personnel);
@@ -25,9 +29,18 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<List<Personnel>> GetActivePersonnel()
+        {
+            return new SuccessDataResult<List<Personnel>>(_personnelDal.GetAll(p=>p.IsActive==true));
+        }
+
         public IDataResult<List<Personnel>> GetAll()
         {
             return new SuccessDataResult<List<Personnel>>(_personnelDal.GetAll());
+        }
+        public IDataResult<List<Personnel>> GetByPassive()
+        {
+            return new SuccessDataResult<List<Personnel>>(_personnelDal.GetAll(p => p.IsActive == false));
         }
 
         public IDataResult<Personnel> GetById(int Id)
@@ -54,6 +67,21 @@ namespace Business.Concrete
         {
             _personnelDal.Update(personnel);
             return new SuccessResult();
+        }
+
+        public IDataResult<List<Personnel>> GetByUnitId(int unitId)
+        {
+            return new SuccessDataResult<List<Personnel>>(_personnelDal.GetAll(p => p.UnitId==unitId));
+        }
+
+        public IDataResult<List<Personnel>> GetByBranchId(int branchId)
+        {
+            return new SuccessDataResult<List<Personnel>>(_personnelDal.GetAll(p => p.BranchId==branchId));
+        }
+
+        public IDataResult<List<Personnel>> GetPersonnelByBranchAndUnit(int branchId, int unitId)
+        {
+            return new SuccessDataResult<List<Personnel>>(_personnelDal.GetPersonnelByBranchAndUnit(branchId, unitId));
         }
     }
 }

@@ -36,14 +36,24 @@ namespace Business.Concrete
             return new SuccessDataResult<List<AssigmentDetailDto>>(_assigment_PersonnelDal.GetAssigmentDetail(),Messages.Listed);
         }
 
-        public IDataResult<AssigmentDetailDto> GetByAssigmentId(int assigmentId)
+        public IDataResult<Assigment_Personnel> GetAssigment_Personnel(int assigmentId, int personnel)
         {
-            return new SuccessDataResult<AssigmentDetailDto>(_assigment_PersonnelDal.GetByAssigmentId(assigmentId), Messages.Listed);
+            return new SuccessDataResult<Assigment_Personnel>(_assigment_PersonnelDal.Get(a => a.AssigmentId == assigmentId && a.PersonnelId == personnel));
+        }
+
+        public IDataResult<List<AssigmentDetailDto>> GetByAssigmentId(int assigmentId)
+        {
+            return new SuccessDataResult<List<AssigmentDetailDto>>(_assigment_PersonnelDal.GetByAssigmentId(assigmentId), Messages.Listed);
         }
 
         public IDataResult<List<Assigment>> GetByPersonnelId(int personnelId)
         {
             return new SuccessDataResult<List<Assigment>>(_assigment_PersonnelDal.GetAssigmentByPersonnelId(personnelId), Messages.Listed);
+        }
+
+        public IDataResult<List<Personnel>> GetPersonByAssigmentId(int assigmentId)
+        {
+            return new SuccessDataResult<List<Personnel>>(_assigment_PersonnelDal.GetPersonnelByAssigmentId(assigmentId));
         }
 
         public IResult Update(Assigment_Personnel assigment_Personnel)

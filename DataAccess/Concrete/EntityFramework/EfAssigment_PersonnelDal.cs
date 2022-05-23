@@ -58,9 +58,41 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public AssigmentDetailDto GetByAssigmentId(int assigmentId)
+
+        public List<AssigmentDetailDto> GetByAssigmentId(int assigmentId)
         {
-            return GetAssigmentDetail().SingleOrDefault(a => a.AssigmentId == assigmentId);
+            return GetAssigmentDetail().Where(a => a.AssigmentId == assigmentId).ToList();
+        }
+
+        public List<Personnel> GetPersonnelByAssigmentId(int assigmentId)
+        {
+            using(PersonnelFollow_UpContex contex = new PersonnelFollow_UpContex())
+            {
+                var result = from u_a in contex.Assigments_Personnels
+                             where u_a.AssigmentId==assigmentId
+                             join a in contex.Assigments
+                             on u_a.AssigmentId equals a.AssigmentId
+                             join p in contex.Personnels
+                             on u_a.PersonnelId equals p.PersonnelId
+                             select new Personnel
+                             {
+                                 PersonnelId = p.PersonnelId,
+                                 Birthdate = p.Birthdate,
+                                 BirthPlace = p.BirthPlace,
+                                 BranchId = p.BranchId,
+                                 EducationalStatus = p.EducationalStatus,
+                                 FirstName = p.FirstName,
+                                 IdentityNumber = p.IdentityNumber,
+                                 IsActive = p.IsActive,
+                                 LastName = p.LastName,
+                                 Occupation = p.Occupation,
+                                 StartDateOfEmployment = p.StartDateOfEmployment,
+                                 TerminationDate = p.TerminationDate,
+                                 UnitId = p.UnitId
+                             };
+                return result.ToList();
+            }
+            
         }
     }
 }

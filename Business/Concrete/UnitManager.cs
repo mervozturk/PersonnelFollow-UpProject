@@ -34,6 +34,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Unit>>(_unitDal.GetAll());
         }
 
+        public IDataResult<List<Unit>> GetByDepartmentId(int Id)
+        {
+            return new SuccessDataResult<List<Unit>>(_unitDal.GetAll(u=>u.DepartmentId==Id));
+        }
+
         public IDataResult<Unit> GetById(int Id)
         {
             return new SuccessDataResult<Unit>(_unitDal.Get(u=>u.UnitId==Id));

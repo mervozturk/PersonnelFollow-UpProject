@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IPersonnelDal : IEntityRepository<Personnel>
     {
+        List<Personnel> GetPersonnelByBranchAndUnit(int branchId, int unitId);
     }
 }

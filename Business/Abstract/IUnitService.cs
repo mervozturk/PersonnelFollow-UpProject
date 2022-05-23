@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Unit>> GetAll();
         IDataResult<Unit> GetById(int Id);
+        IDataResult<List<Unit>> GetByDepartmentId(int Id);
         IResult Add(Unit unit);
         IResult Update(Unit unit);
         IResult Delete(Unit unit);
